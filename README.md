@@ -143,7 +143,6 @@ SHAP values được tính cho cả 3 mô hình (LightGBM, XGBoost, CatBoost) đ
 ```bash
 pip install pandas numpy matplotlib seaborn ydata-profiling
 pip install xgboost lightgbm catboost prophet optuna shap
-pip install lunardate scikit-learn
 ```
 
 Để mở file dashboard: **Microsoft Power BI Desktop**
