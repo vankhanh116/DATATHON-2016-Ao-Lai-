@@ -5,31 +5,6 @@
 Dự án phân tích toàn diện dữ liệu của một nền tảng thương mại điện tử tại Việt Nam, bao gồm 4 giai đoạn chính: **Khám phá dữ liệu (EDA)**, **Tiền xử lý dữ liệu (Data Preprocessing)**, **Dự báo doanh thu (Sales Forecasting)**, và **Trực quan hóa (Visualization)** bằng Power BI.
 
 ---
-
-## 📁 Cấu trúc thư mục
-
-```
-Bài nộp/
-├── EDA & Data Preprocessing/
-│   ├── EDA+ Data Preprocessing.ipynb      ← Notebook EDA & tiền xử lý
-│   └── EDA file/                           ← Báo cáo HTML tự động
-│       ├── sales_info_eda.html
-│       ├── customers_info_eda.html
-│       ├── products_info_eda.html
-│       ├── geography_info_eda.html
-│       ├── promotions_info_eda.html
-│       ├── orders_info_eda.html
-│       ├── order_items.html
-│       ├── payments_info_eda.html
-│       ├── inventory_info_eda.html
-│       ├── shipments_info_eda.html
-│       ├── returns.html
-│       ├── reviews.html
-│       ├── web_traffic.html
-│       └── users_info_eda.html
-└── Sales_Forecasting.ipynb                 ← Notebook dự báo doanh thu
-```
-
 > **📌 Lưu ý:** File dashboard Power BI (`[DATATHON] Final.pbix`) có dung lượng lớn nên không thể tải lên GitHub. File được đính kèm trực tiếp trong file Dashboard.docx
 ---
 
