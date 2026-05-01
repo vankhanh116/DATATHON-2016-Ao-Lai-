@@ -133,7 +133,6 @@ Xác định pattern lặp lại theo năm của 6 chiến dịch khuyến mãi 
 |---|---|
 | **Calendar** | Year, Month, Day, Quarter, DayOfWeek, WeekOfYear, IsWeekend, IsMonday, IsFriday |
 | **Cyclical encoding** | Sin/cos của Month, DayOfWeek, DayOfYear (tránh lỗi thứ tự tuyến tính) |
-| **Khuyến mãi** | Binary flag theo từng chiến dịch, xử lý riêng năm lẻ |
 | **Peak proximity** | Độ gần với các tháng doanh thu cao điểm (4, 5, 6) |
 
 #### Bước 3 — Walk-Forward Cross Validation
