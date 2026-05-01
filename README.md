@@ -30,8 +30,7 @@ Bài nộp/
 └── Sales_Forecasting.ipynb                 ← Notebook dự báo doanh thu
 ```
 
-> **📌 Lưu ý:** File dashboard Power BI (`[DATATHON] Final.pbix`) có dung lượng lớn nên không thể tải lên GitHub. File được đính kèm trực tiếp trong tài liệu nộp bài (báo cáo / submission package).
-
+> **📌 Lưu ý:** File dashboard Power BI (`[DATATHON] Final.pbix`) có dung lượng lớn nên không thể tải lên GitHub. File được đính kèm trực tiếp trong file Dashboard.docx
 ---
 
 ## 🧪 Phần 1: EDA & Data Preprocessing
