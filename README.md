@@ -105,7 +105,6 @@ Fold 1: Train đến 2018 → Validate 2019
 Fold 2: Train đến 2019 → Validate 2020
 Fold 3: Train đến 2020 → Validate 2021
 Fold 4: Train đến 2021 → Validate 2022
-Fold 5: Train đến 2022 → Validate 2023
 ```
 
 #### Bước 3 — Kiến trúc Residual Learning + Stacking
