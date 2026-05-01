@@ -1,61 +1,201 @@
-📊 DATATHON — Phân Tích Dữ Liệu Thương Mại Điện Tử Việt Nam
-📝 Tổng quan dự án
-Dự án thực hiện phân tích chuyên sâu dữ liệu nền tảng thương mại điện tử tại Việt Nam, bao gồm: Khám phá dữ liệu (EDA), Tiền xử lý (Preprocessing), Dự báo doanh thu (Sales Forecasting), và Trực quan hóa (Visualization).
+# 📊 DATATHON — Bài Nộp Phân Tích Dữ Liệu Thương Mại Điện Tử Việt Nam
 
-📁 Cấu trúc thư mục
+## Tổng quan dự án
+
+Dự án phân tích toàn diện dữ liệu của một nền tảng thương mại điện tử tại Việt Nam, bao gồm 4 giai đoạn chính: **Khám phá dữ liệu (EDA)**, **Tiền xử lý dữ liệu (Data Preprocessing)**, **Dự báo doanh thu (Sales Forecasting)**, và **Trực quan hóa (Visualization)** bằng Power BI.
+
+---
+
+## 📁 Cấu trúc thư mục
+
+```
 Bài nộp/
 ├── EDA & Data Preprocessing/
-│   ├── EDA+ Data Preprocessing.ipynb      ← Notebook xử lý dữ liệu
+│   ├── EDA+ Data Preprocessing.ipynb      ← Notebook EDA & tiền xử lý
 │   └── EDA file/                           ← Báo cáo HTML tự động
-├── Sales_Forecasting.ipynb                 ← Notebook dự báo doanh thu
-└── Visualize/
-    └── [DATATHON] Final.pbix               ← File thiết kế Power BI
-🧪 Phần 1: EDA & Data Preprocessing
-Quy trình xử lý chính:
-Làm sạch dữ liệu: Xử lý giá trị thiếu (null) tại bảng promotions và order_items.
+│       ├── sales_info_eda.html
+│       ├── customers_info_eda.html
+│       ├── products_info_eda.html
+│       ├── geography_info_eda.html
+│       ├── promotions_info_eda.html
+│       ├── orders_info_eda.html
+│       ├── order_items.html
+│       ├── payments_info_eda.html
+│       ├── inventory_info_eda.html
+│       ├── shipments_info_eda.html
+│       ├── returns.html
+│       ├── reviews.html
+│       ├── web_traffic.html
+│       └── users_info_eda.html
+└── Sales_Forecasting.ipynb                 ← Notebook dự báo doanh thu
+```
 
-Chuẩn hóa địa lý: Ánh xạ Thành phố sang Miền (Bắc / Trung / Nam) để phân tích vùng miền.
+> **📌 Lưu ý:** File dashboard Power BI (`[DATATHON] Final.pbix`) có dung lượng lớn nên không thể tải lên GitHub. File được đính kèm trực tiếp trong tài liệu nộp bài (báo cáo / submission package).
 
-Công cụ: Sử dụng ydata_profiling để xuất báo cáo thống kê tự động cho 14 bảng dữ liệu master và giao dịch.
+---
 
-📊 Phần 2: Visualization
-Link Dashboard trực tuyến: Truy cập tại đây
+## 🧪 Phần 1: EDA & Data Preprocessing
 
-Dashboard tập trung vào các chỉ số cốt lõi:
+**File:** `EDA+ Data Preprocessing.ipynb`
 
-Kinh doanh: Doanh thu theo thời gian, lợi nhuận gộp và hiệu suất vùng miền.
+### Dữ liệu đầu vào
 
-Khách hàng: Hành vi mua sắm, xu hướng đơn hàng và đánh giá từ người dùng.
+Dự án làm việc với **3 nhóm bảng dữ liệu** chính:
 
-Vận hành: Hiệu quả khuyến mãi, tình trạng giao hàng và tỷ lệ hoàn trả.
+| Nhóm | Bảng |
+|---|---|
+| **Master Data** (Danh mục) | `customers`, `products`, `geography`, `promotions` |
+| **Giao dịch** (Transactions) | `orders`, `order_items`, `payments`, `inventory`, `sales` |
+| **Vận hành & Phản hồi** | `shipments`, `returns`, `reviews`, `web_traffic`, `users` |
 
-🤖 Phần 3: Sales Forecasting
-Dự báo doanh thu cho 548 ngày tiếp theo dựa trên kiến trúc Residual Learning (Prophet + Stacking Ensemble).
+### Công cụ sử dụng
 
-Feature Engineering (Đã tinh gọn):
-Calendar: Năm, tháng, ngày, quý, thứ trong tuần và cuối tuần.
+- `pandas` — đọc và xử lý dữ liệu
+- `ydata_profiling` — tạo báo cáo EDA tự động
+- `matplotlib`, `seaborn` — trực quan hóa
 
-Cyclical encoding: Mã hóa Sin/Cos cho tháng và ngày để xử lý tính chu kỳ.
+### Quy trình EDA
 
-Promotions: Gắn cờ (flag) cho 6 chiến dịch khuyến mãi lớn hàng năm (Spring, Mid-Year, Fall, Year-End...).
+Mỗi bảng được phân tích tự động bằng `ProfileReport` từ thư viện `ydata_profiling`, xuất ra file `.html` tương tác với đầy đủ:
+- Thống kê mô tả (min, max, mean, median, std)
+- Phân phối giá trị
+- Phát hiện giá trị thiếu và ngoại lệ
+- Ma trận tương quan
 
-Peak proximity: Độ gần với các tháng cao điểm doanh thu (tháng 4, 5, 6).
+### Quy trình Tiền xử lý
 
-Mô hình hóa:
-Prophet: Dự báo xu hướng và tính mùa vụ tổng thể.
+| Bước | Mô tả |
+|---|---|
+| Xử lý giá trị null — `promotions` | Điền `'All'` vào cột `applicable_category` khi không có danh mục áp dụng |
+| Xử lý giá trị null — `order_items` | Điền `'None'` vào cột `promo_id` và `promo_id_2` khi không có khuyến mãi |
+| Chuẩn hóa vùng địa lý | Xây dựng bảng ánh xạ Thành phố → Miền (Bắc / Trung / Nam) cho bảng `geography`, xuất ra `geography_updated.csv` |
+| Xuất dữ liệu sạch | `promotions_cleaned.csv`, `order_items_cleaned.csv`, `geography_updated.csv` |
 
-XGBoost / LightGBM / CatBoost: Học các sai số (residuals) từ Prophet.
+#### Bảng ánh xạ vùng địa lý
 
-Optuna: Tối ưu hóa siêu tham số tự động.
+- **Miền Bắc:** Hà Nội, Hải Phòng, Hạ Long, Bắc Ninh, Nam Định, Ninh Bình, Lào Cai, Thái Nguyên, Bắc Giang, …
+- **Miền Trung & Tây Nguyên:** Đà Nẵng, Huế, Đà Lạt, Nha Trang, Quy Nhơn, Buôn Ma Thuột, Hội An, …
+- **Miền Nam:** TP. Hồ Chí Minh, Biên Hòa, Vũng Tàu, Cần Thơ, Mỹ Tho, Cà Mau, …
 
-⚙️ Yêu cầu môi trường
-Bash
+---
+
+## 📊 Phần 2: Visualization
+
+**File:** `[DATATHON] Final.pbix` *(đính kèm trong tài liệu nộp bài — không upload GitHub do dung lượng lớn)*
+
+Dashboard Power BI được xây dựng từ dữ liệu đã qua xử lý, tổng hợp insights về:
+- Hiệu suất kinh doanh theo thời gian và vùng miền
+- Hành vi khách hàng và xu hướng đơn hàng
+- Hiệu quả khuyến mãi và vận chuyển
+- Tỷ lệ đánh giá, hoàn trả và lưu lượng web
+
+---
+
+## 🤖 Phần 3: Sales Forecasting
+
+**File:** `Sales_Forecasting.ipynb`
+
+Notebook dự báo doanh thu tương lai (548 ngày) dựa trên dữ liệu lịch sử từ `sales.csv`, sử dụng kiến trúc **Residual Learning + Stacking Ensemble**.
+
+### Dữ liệu đầu vào
+
+| File | Mô tả |
+|---|---|
+| `sales.csv` | Doanh thu lịch sử từ 2012-07-04 đến 2024 |
+| `promotions.csv` | Thông tin các chiến dịch khuyến mãi |
+| `sample_submission.csv` | Khung dự báo 548 ngày tương lai |
+
+### Thư viện sử dụng
+
+- `xgboost`, `lightgbm`, `catboost` — mô hình gradient boosting
+- `prophet` — mô hình chuỗi thời gian của Meta
+- `optuna` — tối ưu siêu tham số tự động (Bayesian)
+- `shap` — giải thích tầm quan trọng của đặc trưng
+- `sklearn` — đánh giá mô hình, cross-validation
+
+### Quy trình mô hình hóa
+
+#### Bước 1 — Phân tích khuyến mãi
+Xác định pattern lặp lại theo năm của 6 chiến dịch khuyến mãi để xây dựng feature:
+
+| Chiến dịch | Thời gian | Ghi chú |
+|---|---|---|
+| Year-End Sale | 18/11 – 02/01 | Hàng năm |
+| Mid-Year Sale | 23/06 – 22/07 | Hàng năm |
+| Fall Launch | 30/08 – 01/10 | Hàng năm |
+| Spring Sale | 18/03 – 17/04 | Hàng năm |
+| Rural Special | 31/01 – 01/03 | Chỉ năm lẻ |
+| Urban Blowout | 30/07 – 02/09 | Chỉ năm lẻ |
+
+#### Bước 2 — Feature Engineering
+
+| Nhóm feature | Mô tả |
+|---|---|
+| **Calendar** | Year, Month, Day, Quarter, DayOfWeek, WeekOfYear, IsWeekend, IsMonday, IsFriday |
+| **Cyclical encoding** | Sin/cos của Month, DayOfWeek, DayOfYear (tránh lỗi thứ tự tuyến tính) |
+| **Khuyến mãi** | Binary flag theo từng chiến dịch, xử lý riêng năm lẻ |
+| **Peak proximity** | Độ gần với các tháng doanh thu cao điểm (4, 5, 6) |
+
+#### Bước 3 — Walk-Forward Cross Validation
+
+Dữ liệu được chia theo 5 fold thời gian (không dùng k-fold ngẫu nhiên) để tránh data leakage:
+
+```
+Fold 1: Train đến 2018 → Validate 2019
+Fold 2: Train đến 2019 → Validate 2020
+Fold 3: Train đến 2020 → Validate 2021
+Fold 4: Train đến 2021 → Validate 2022
+Fold 5: Train đến 2022 → Validate 2023
+```
+
+#### Bước 4 — Kiến trúc Residual Learning + Stacking
+
+```
+[Prophet]  →  Dự báo xu hướng + mùa vụ (log scale)
+     ↓
+[Residual] =  Revenue_log - Prophet_pred
+     ↓
+[XGBoost / LightGBM / CatBoost]  →  Học phần dư (residual)
+     ↓
+[Meta-model: Huber Regressor]  →  Stacking OOF predictions
+     ↓
+[Final Forecast]  →  submission.csv
+```
+
+#### Bước 5 — Tối ưu siêu tham số
+Sử dụng **Optuna** để tự động tìm bộ siêu tham số tối ưu cho XGBoost, LightGBM, CatBoost (Bayesian optimization với pruning).
+
+#### Bước 6 — Đánh giá & Giải thích
+
+Các metric đánh giá: **MAE**, **RMSE**, **R²**
+
+SHAP values được tính cho cả 3 mô hình (LightGBM, XGBoost, CatBoost) để giải thích tầm quan trọng của từng feature trong dự báo.
+
+### Output
+
+| File | Mô tả |
+|---|---|
+| `submission.csv` | Dự báo Revenue và COGS cho 548 ngày tương lai |
+
+---
+
+## ⚙️ Yêu cầu môi trường
+
+```bash
 pip install pandas numpy matplotlib seaborn ydata-profiling
 pip install xgboost lightgbm catboost prophet optuna shap
-pip install scikit-learn
-👥 Thông tin dự án
-Cuộc thi: DATATHON 2026
+pip install lunardate scikit-learn
+```
 
-Thí sinh: LE VAN KHANH
+Để mở file dashboard: **Microsoft Power BI Desktop**
 
-Ngày hoàn thành: 01/05/2026
+---
+
+## 👥 Thông tin
+
+| Mục | Chi tiết |
+|---|---|
+| Cuộc thi | DATATHON 2026 — Round 1 |
+| Lĩnh vực | Thương mại điện tử Việt Nam |
+| Ngày nộp | 01/05/2026 |
+| Ngôn ngữ | Python 3, DAX (Power BI) |
