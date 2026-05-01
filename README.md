@@ -134,7 +134,7 @@ SHAP values được tính cho cả 3 mô hình (LightGBM, XGBoost, CatBoost) đ
 
 | File | Mô tả |
 |---|---|
-| `submission.csv` | Dự báo Revenue và COGS cho 548 ngày tương lai |
+| `submission.csv` | Dự báo Revenue cho 548 ngày tương lai |
 
 ---
 
